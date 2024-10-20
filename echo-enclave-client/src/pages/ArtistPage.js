@@ -25,14 +25,14 @@ function ArtistPage() {
   }, [genre]);
 
   return (
-    <div className="min-h-screen bg-gray-100 p-4">
-      <h1 className="text-3xl font-bold text-center mb-8 capitalize">{genre} Artists</h1>
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+    <div className="min-h-screen bg-black p-4">
+      <h1 className="text-2xl font-bold text-center mb-6 text-white capitalize">{`Genre / ${genre}`}</h1>
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
         {artists.map((artist) => (
-          <Link to={`/chat/${artist.name}`} key={artist.id}>
-            <div className="bg-white rounded-lg shadow hover:shadow-lg transition cursor-pointer">
+          <Link to={`/chat/${artist.id}`} key={artist.id}>
+            <div className="bg-[#1e1e1e] rounded-lg overflow-hidden shadow hover:shadow-xl transition cursor-pointer">
               <img
-                className="w-full h-48 object-cover rounded-t-lg"
+                className="w-full h-48 object-cover"
                 src={
                   artist.images[0]
                     ? artist.images[0].url
@@ -41,9 +41,15 @@ function ArtistPage() {
                 alt={artist.name}
               />
               <div className="p-4">
-                <p className="text-lg font-semibold">{artist.name}</p>
-                <p className="text-sm text-gray-600">Followers: {artist.followers.total.toLocaleString()}</p>
-                <p className="text-sm text-gray-600">Popularity: {artist.popularity}</p>
+                <p className="text-lg font-semibold text-white">{artist.name}</p>
+              <div className="flex justify-between ">
+                <p className="text-sm text-gray-400">{artist.followers.total.toLocaleString()} followers</p>
+                <div className="mt-2 flex justify-between items-center">
+                  <span className="text-m font-bold h-[38px] text-[#69D8F7] w-[45px] text-center px-2 relative rounded bottom-[-15px] bg-[#0D3D45]">
+                    {artist.popularity}
+                  </span>
+                </div>
+                </div>
               </div>
             </div>
           </Link>

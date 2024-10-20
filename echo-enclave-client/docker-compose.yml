@@ -1,0 +1,31 @@
+
+
+services:
+  client:
+    build:
+      context: ./EchoEnclave-client
+    ports:
+      - '3000:3000'
+    depends_on:
+      - server
+
+  server:
+    build:
+      context: ../../EchoEnclave-server
+    ports:
+      - '5000:5000'
+    env_file:
+      - ../../EchoEnclave-server/.env
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:4.4
+    restart: always
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
